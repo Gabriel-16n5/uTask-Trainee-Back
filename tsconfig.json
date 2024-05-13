@@ -6,4 +6,7 @@
     "moduleResolution": "Node", 
     "baseUrl": "src", 
     "paths": { "@/*": [ "*" ] } }, 
-    "ts-node": { "esm": true } }
+    "ts-node": { "esm": true } ,
+    "execMap": { "ts": "node --require ts-node/register --require tsconfig-paths/register" } 
+  }
+    
