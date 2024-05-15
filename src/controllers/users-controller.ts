@@ -8,6 +8,11 @@ type UserId = Pick<User, 'userId'>;
 type SignUp = Omit<User, 'userId'>;
 type SignIn = Pick<User, 'email' | 'password'>;
 
+export async function getUsers (req: Request, res: Response) {
+    const users = await usersService.getUsers();
+    return res.status(httpStatus.OK).send(users);
+}
+
 export async function  signUp(req: Request, res: Response) {
     const body = req.body as SignUp
         const result = await usersService.signUp(body);
@@ -18,11 +23,6 @@ export async function  signIn(req: Request, res: Response) {
     const{email, password} = req.body as SignIn
         const result = await authenticationService.signIn(email, password);
         return res.send(result).status(httpStatus.OK);
-}
-
-export async function getUsers (req: Request, res: Response) {
-    const users = await usersService.getUsers();
-    return res.status(httpStatus.OK).send(users);
 }
 
 export async function deleteUsers(req: Request, res: Response) {
@@ -38,3 +38,7 @@ export async function updateUsers (req: Request, res: Response) {
   return res.sendStatus(httpStatus.OK);
 }
 
+export async function getHome (req: Request, res: Response) {
+    const users = await usersService.getUsers();
+    return res.status(httpStatus.OK).send(users);
+}

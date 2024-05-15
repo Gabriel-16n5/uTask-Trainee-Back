@@ -7,6 +7,12 @@ type UserId = Pick<User, 'userId'>;
 type SignUp = Omit<User, 'userId'>;
 type SignIn = Pick<User, 'email' | 'password'>;
 
+export async function getUsers() {
+    const usersList = await usersRepository.getUsers();
+    if(!usersList||usersList.length===0) throw notFoundError("users not found");
+    return usersList;
+}
+
 export async function signUp(user:SignUp) {
     const hashedPassword = await bcrypt.hash(user.password, 12);
     const userCreated = await usersRepository.signUp({
@@ -23,12 +29,6 @@ export async function signIn(user:SignIn) {
     console.log(userLogin)
     if(!userLogin||userLogin.length===0) throw invalidError("we can't find this user")
     return userLogin;
-}
-
-export async function getUsers() {
-    const usersList = await usersRepository.getUsers();
-    if(!usersList||usersList.length===0) throw notFoundError("users not found");
-    return usersList;
 }
 
 export async function deleteUser(userId:UserId) {
