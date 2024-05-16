@@ -7,7 +7,9 @@ CREATE TABLE "users" (
     "userId" SERIAL PRIMARY KEY, 
     "name" TEXT, 
     "email" TEXT, 
-    "password" TEXT );
+    "password" TEXT 
+);
+
 
  sessionId | token | userId | createdat | updatedat 
 -----------+-------+--------+-----------+-----------
@@ -19,3 +21,20 @@ CREATE TABLE "session" (
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     FOREIGN KEY ("userId") REFERENCES "users"("userId") );
+
+    CREATE TABLE tasks (
+    id SERIAL PRIMARY KEY,
+	title TEXT,
+	description TEXT,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+ id | title | description | created_at 
+----+-------+-------------+------------
+
+CREATE TABLE tasks (
+    id SERIAL PRIMARY KEY,
+	title TEXT,
+	description TEXT,
+	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
