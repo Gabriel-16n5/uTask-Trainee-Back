@@ -57,6 +57,12 @@ export async function deleteUser(userId:UserId) {
   `, [task.title, task.description]);
   }
 
+  export async function getTasks() {
+    const result = await connection.query<User>(`SELECT * FROM tasks`);
+    const listTasks = result.rows
+    return listTasks;
+  }
+
   export const usersRepository = {
     getUsers,
     signUp,
@@ -64,5 +70,6 @@ export async function deleteUser(userId:UserId) {
     updateUser,
     signIn,
     getUserByEmail,
-    createTask
+    createTask,
+    getTasks
   }

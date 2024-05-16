@@ -56,11 +56,18 @@ export async function createTask(task:Task) {
     return taskCreated;
 }
 
+export async function getTasks() {
+    const tasks = await usersRepository.getTasks();
+    if(!tasks||tasks.length===0) throw notFoundError("tasks not found");
+    return tasks;
+}
+
 export const usersService = {
     getUsers,
     signUp,
     deleteUser,
     updateUser,
     signIn,
-    createTask
+    createTask,
+    getTasks
 }

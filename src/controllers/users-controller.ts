@@ -44,8 +44,8 @@ export async function updateUsers (req: Request, res: Response) {
 }
 
 export async function getHome (req: Request, res: Response) {
-    const users = await usersService.getUsers();
-    return res.status(httpStatus.OK).send(users);
+    const tasks = await usersService.getTasks();
+    return res.status(httpStatus.OK).send(tasks);
 }
 
 export async function createTask (req: Request, res: Response) {
