@@ -3,10 +3,15 @@ import User from "../protocols/user-protocol";
 import { usersService } from "@/services/users-service";
 import httpStatus from "http-status";
 import { authenticationService } from "../services/authentication-service";
+import { Description } from "joi";
 
 type UserId = Pick<User, 'userId'>;
 type SignUp = Omit<User, 'userId'>;
 type SignIn = Pick<User, 'email' | 'password'>;
+type Task = {
+    title: string;
+    description: string;
+};
 
 export async function getUsers (req: Request, res: Response) {
     const users = await usersService.getUsers();
@@ -41,4 +46,10 @@ export async function updateUsers (req: Request, res: Response) {
 export async function getHome (req: Request, res: Response) {
     const users = await usersService.getUsers();
     return res.status(httpStatus.OK).send(users);
+}
+
+export async function createTask (req: Request, res: Response) {
+    const body = req.body as Task
+        const result = await usersService.createTask(body);
+        return res.sendStatus(httpStatus.CREATED)
 }

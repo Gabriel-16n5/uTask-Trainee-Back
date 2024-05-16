@@ -6,6 +6,10 @@ import bcrypt from 'bcrypt';
 type UserId = Pick<User, 'userId'>;
 type SignUp = Omit<User, 'userId'>;
 type SignIn = Pick<User, 'email' | 'password'>;
+type Task = {
+    title: string;
+    description: string;
+};
 
 export async function getUsers() {
     const usersList = await usersRepository.getUsers();
@@ -43,10 +47,20 @@ export async function updateUser(user:User) {
     return userUpdated;
 }
 
+export async function createTask(task:Task) {
+    const taskCreated = await usersRepository.createTask({
+        title: task.title,
+        description: task.description
+    });
+    if(!taskCreated) throw invalidError("we can't create this task")
+    return taskCreated;
+}
+
 export const usersService = {
     getUsers,
     signUp,
     deleteUser,
     updateUser,
-    signIn
+    signIn,
+    createTask
 }

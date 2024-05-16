@@ -4,7 +4,10 @@ import User from "../protocols/user-protocol";
 type UserId = Pick<User, 'userId'>;
 type SignUp = Omit<User, 'userId'>;
 type SignIn = Pick<User, 'email' | 'password'>;
-
+type Task = {
+  title: string;
+  description: string;
+};
 
 export async function signUp(user: SignUp) {
   return await connection.query<User>(`
@@ -47,11 +50,19 @@ export async function deleteUser(userId:UserId) {
     ;`, [user.userId, user.name, user.email, user.password])
   }
 
+  export async function createTask(task: Task) {
+    return await connection.query<Task>(`
+    INSERT INTO tasks (title, description)
+        VALUES ($1, $2)
+  `, [task.title, task.description]);
+  }
+
   export const usersRepository = {
     getUsers,
     signUp,
     deleteUser,
     updateUser,
     signIn,
-    getUserByEmail
+    getUserByEmail,
+    createTask
   }
