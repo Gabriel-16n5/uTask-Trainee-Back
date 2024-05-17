@@ -1,7 +1,5 @@
 # uTask-Trainee-Back
 
- userId | name | email | password 
---------+------+-------+----------
 
 CREATE TABLE "users" ( 
     "userId" SERIAL PRIMARY KEY, 
@@ -10,9 +8,6 @@ CREATE TABLE "users" (
     "password" TEXT 
 );
 
-
- sessionId | token | userId | createdat | updatedat 
------------+-------+--------+-----------+-----------
 
 CREATE TABLE "session" ( 
     "sessionId" SERIAL PRIMARY KEY, 
@@ -28,9 +23,6 @@ CREATE TABLE "session" (
 	description TEXT,
 	created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
- id | title | description | created_at 
-----+-------+-------------+------------
 
 CREATE TABLE tasks (
     id SERIAL PRIMARY KEY,
